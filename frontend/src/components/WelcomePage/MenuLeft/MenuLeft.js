@@ -43,7 +43,6 @@ class MenuLeft extends Component {
           this.setState({
               picture: coolFile,
           });
-          console.log(coolFile);
           this.props.setPicture(coolFile);
         });
       }

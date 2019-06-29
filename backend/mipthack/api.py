@@ -14,17 +14,29 @@ from .serializer import githubSerializer, pictureSerializer, testSerializer
 
 from .models import Picture, Test, Github
 from .api_ml import send_to_ml, receive_from_ml
+from PIL import Image
+import base64
+import io
+import numpy as np
+import cv2
+# Take in base64 string and return cv image
+def stringToRGB(base64_string):
+    imgdata = base64.b64decode(str(base64_string))
+    image = Image.open(io.BytesIO(imgdata))
+    return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
 
-
+@csrf_exempt
 def upload(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        data1 = data[0]
-        data2 = data[1]
-        data3 = data[3]
-        print(data1)
-
-
+        login = data['login']
+        password = data['password']
+        img_data = data['picture']
+        image = stringToRGB(img_data)
+        cv2.imwrite('image.png',image)
+        test = data['test']
+        return 1
+    return "0"
 
 def upload1(request):
     """

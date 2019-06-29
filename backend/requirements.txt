@@ -2,6 +2,8 @@ matplotlib
 yacs
 numpy
 django-rest-framework
+django-cors-headers
 django
 pika
 Pillow
+opencv-python

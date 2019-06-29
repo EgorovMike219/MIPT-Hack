@@ -12,9 +12,9 @@ class Example extends Component {
         super(props);
         
         this.state = {
-            testEnabled: false,
-            setTest: this.props.setTest
+            testEnabled: false
         };
+        this.onComplete = this.onComplete.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -55,7 +55,7 @@ class Example extends Component {
 
         console.log(result)
 
-        this.state.setTest(result)
+        this.props.setTest(result)
     }
 
     json = {

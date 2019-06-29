@@ -66,7 +66,9 @@ class WelcomePage extends Component {
       }
 
       setTest(test) {
-        this.setState({ test: test 
+        this.setState({ 
+          test: test,
+          testEnabled: false 
         }, () => {
           this.checkInput();
         });
