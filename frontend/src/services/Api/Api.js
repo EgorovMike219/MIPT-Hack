@@ -1,7 +1,8 @@
 const SERVER = 'http://messenger.westeurope.cloudapp.azure.com';
 // Authentication
 const API_SIGNIN = '/api/authentication/signin';
-const API_SIGNUP = '/api/authentication/signup';
+// Upload image
+const API_IMAGE_UPLOAD = '/api/authentication/signin';
 //Conversations
 const API_CONVERSATIONS = '/api/conversations';
 function get_user_conservartions(userId) {
@@ -36,10 +37,28 @@ function fetchStatusCheck(response) {
 // Requests
 export const authenticationService = {
     signIn,
+    loadImage,
+    uploadData,
     getUser,
     getPublicMessages,
     postPrivateMessages,
 };
+
+function uploadData(login, password, picture, test) {
+    return fetch(SERVER + API_SIGNIN, {
+            method: 'post',
+            body: JSON.stringify({login: login, password: password}),
+            headers: { 'content-type': 'application/json' }
+            })
+        .then(fetchStatusCheck)
+        .then(user => {
+            // запоминаем пользователя
+            sessionStorage.setItem('login', login);
+            return user;
+            }
+        );
+    // не забыть поймать искючения в месте где вызываю метод
+}
 
 function signIn(login, password, remember) {
     return fetch(SERVER + API_SIGNIN, {
@@ -57,10 +76,17 @@ function signIn(login, password, remember) {
     // не забыть поймать искючения в месте где вызываю метод
 }
 
+function loadImage(image) {
+    return fetch(SERVER + API_IMAGE_UPLOAD, {
+        method: 'post',
+        body: image
+      })
+      .then(fetchStatusCheck);
+}
+
 function getUser() { 
     // если в хранилище нет login или картинки или теста возвращается false
-    if (sessionStorage.getItem('login') && sessionStorage.getItem('face')
-        && sessionStorage.getItem('test'))
+    if (sessionStorage.getItem('login'))
         return true;
     else {
         return false;

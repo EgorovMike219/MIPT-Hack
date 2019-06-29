@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ImageUploader from 'react-images-upload'
 import { Button} from 'react-bootstrap'
 import Auth from '../Auth/Auth'
+import {authenticationService} from '../../../services/Api/Api'
 import './MenuLeft.css'
 
 class MenuLeft extends Component {
@@ -13,12 +14,12 @@ class MenuLeft extends Component {
         super(props);
 
         this.state = { 
-            pictures: [],
+            picture: null,
             show: false, 
         };
 
         this.connectToGitHub = this.connectToGitHub.bind(this);
-        this.uploadPhoto = this.uploadPhoto.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.passTest = this.passTest.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -29,10 +30,23 @@ class MenuLeft extends Component {
           console.log("connect to gitHub")
       }
     
-      uploadPhoto(picture) {
+      onDrop(picture) {
         console.log("uploadPhoto");
+        console.log(picture);
         this.setState({
-            pictures: this.state.pictures.concat(picture),
+            picture: picture,
+        });
+        authenticationService.loadImage(picture[0])
+          .then(response => {
+            this.setState({ 
+              uploading: false,
+            })
+          })
+          .catch(err => {
+              this.setState({ 
+                uploading: false,
+              });
+              console.log("Error logging in", err);
         });
       }
       handleClose() {
