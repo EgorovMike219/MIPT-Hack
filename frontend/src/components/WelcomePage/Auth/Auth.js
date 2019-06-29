@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import {authenticationService} from '../../../services/Api/Api'
+import { Button, Modal } from 'react-bootstrap'
 import './Auth.css';
-import 'bootstrap/dist/css/bootstrap.css'
 
 class Auth extends Component {
+  // в пропах show, handleClose
 	constructor(props) {
         super(props);
         
         this.state = {
           login : "",      // UI element
           password: "",    // UI element
-          remember: true,  // UI element
           requestingServer: false,  // page status
           warning: null,            // warning message to display
         };
@@ -18,8 +18,6 @@ class Auth extends Component {
         this.onButton          = this.onButton.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleError       = this.handleError.bind(this);
-        this.linkRegister      = this.linkRegister.bind(this);
-        this.linkSignIn        = this.linkSignIn.bind(this);
         // redirect to home if already logged in
         if (authenticationService.getCurrentUser()) { 
             this.props.history.push('/');
@@ -48,103 +46,74 @@ class Auth extends Component {
       }
     
       handleInputChange(event) {
-        switch (event.target.id){
-          case 'inputLogin':
+        switch (event.target.placeholder){
+          case "Login":
             this.setState({ login: event.target.value});
             break;
-          case 'inputPassword':
+          case "Password":
             this.setState({ password: event.target.value});
             break;
           default:
-            this.setState({ remember: event.target.checked });
+            console.log('default');
             break;
         }
       }
     
       render() {
         return (
-          <div className="text-center">
-            <form className="form-signin" onSubmit={this.onButton}>
-              {/* <img className="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/> */}
-              
-              {/* -----------------   Приветсвие ----------------------*/}
-    
-              { this.state.mode === 'signin' ?
-                <h1 className="h3 mb-3 font-weight-normal"> Please sign in </h1> :
-                <h1 className="h3 mb-3 font-weight-normal"> Please register </h1>
-              }
-    
-              {/* -----------------   поле User Name ----------------------*/}
-              { this.state.mode === 'signin' ||
-                <label htmlFor="inputUser" className="sr-only">
-                  User name
-                </label> }
-    
-              { this.state.mode === 'signin' ||
-                  <input type="text" id="inputUser" className="form-control"
-                  placeholder="User name" value={this.state.user}
-                  onChange={this.handleInputChange} required autoFocus /> }
-    
-              {/* -----------------   поле Login  ----------------------*/}
-                <label htmlFor="inputLogin" className="sr-only">
-                Login
-                </label>
-                <input type="text" id="inputLogin" className="form-control"
-                placeholder="Login" value={this.state.login}
-                onChange={this.handleInputChange} required autoFocus />
-    
-              {/* -----------------   поле Password  ----------------------*/}
-              <label htmlFor="inputPassword" className="sr-only">
-                Password
-              </label>
-                <input type="password" id="inputPassword" className="form-control"
-                placeholder="Password" value={this.state.password}
-                onChange={this.handleInputChange} required />
-    
-              {/* -----------------   чекбокс Remember me  ----------------------*/}
-              { this.state.mode === 'signin' &&
-                <div className="checkbox mb-3">
-                      <label>
-                          <input type="checkbox" value="remember-me" checked={this.state.remember} onChange={this.handleInputChange} /> Remember me
-                      </label>
-                  </div>
-              }
-    
-              {/* -----------------   кнопка   ----------------------*/}
-              { this.state.mode === 'signin' ?
-                (
-                  this.state.requestingServer === true ?
-                    <button className="btn btn-lg btn-primary btn-block disabled">Signing in...</button> :
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                ):
-                (
-                  this.state.requestingServer === true ?
-                    <button className="btn btn-lg btn-primary btn-block disabled">Registering...</button> :
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-                )
-              }
-              {/* разобраться как выровнять по высоте*/}
-              <h1 className="h3 mb-3 font-weight-normal"> Or </h1>
-              { this.state.mode === 'signin' ?
-                (
-                    this.state.requestingServer === true ?
-                    <button className="btn btn-lg btn-primary btn-block disabled">Sign up</button>:
-                    <button className="btn btn-lg btn-primary btn-block" onClick={this.linkRegister}>Sign up</button>
-                ):
-                (
-                    this.state.requestingServer === true ?
-                    <button className="btn btn-lg btn-primary btn-block disabled">Sign in</button>:
-                    <button className="btn btn-lg btn-primary btn-block" onClick={this.linkSignIn}>Sign in</button>
-                )
-              }
+          <Modal show={this.props.show} onHide={this.props.handleClose}>
+              <Modal.Header closeButton>
+                  <Modal.Title>Connect to GitHub</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form className="form-signin" onSubmit={this.onButton}>
+                  <h1 className="h3 mb-3 font-weight-normal"> Please sign in </h1> 
+                  <label htmlFor="inputLogin" className="sr-only">
+                  Login
+                  </label>
+                  <input type="text" id="inputLogin" className="form-control"
+                  placeholder="Login" value={this.state.login}
+                  onChange={this.handleInputChange} required autoFocus />
+                  <label htmlFor="inputPassword" className="sr-only">
+                    Password
+                  </label>
+                    <Button variant="secondary" onClick={this.handleClose}>
+                  Close
+                  </Button>
+                  <Button variant="primary" onClick={this.handleClose}>
+                  Save Changes
+                  </Button>
+                    </form>
+                <Form>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>GitHub Login</Form.Label>
+                    <Form.Control type="text" placeholder="Login" value={this.state.login}
+                      onChange={this.handleInputChange} required autoFocus />
+                    <Form.Text className="text-muted">
+                      We'll never share your login with anyone else.
+                    </Form.Text>
+                  </Form.Group>
 
-              {/* ----------------- сообщение об ошибке   ----------------------*/}
-              { this.state.warning === null ||
-                 <div className="alert alert-danger" role="alert">{this.state.warning}</div>
-              }
-              <p className="mt-5 mb-3 text-muted">&copy; 2019</p>
-            </form>
-          </div>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" value={this.state.password}
+                      onChange={this.handleInputChange} required />
+                  </Form.Group>
+                  {this.state.requestingServer === true ?
+                    <Button variant="primary" type="submit" disabled>Signing in...</Button>:
+                    <Button variant="primary" type="submit">Sign in</Button>
+                  }
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                  <Button variant="secondary" onClick={this.props.handleClose}>
+                  Close
+                  </Button>
+                  { this.state.warning === null ||
+                    <div className="alert alert-danger" role="alert">{this.state.warning}</div>
+                  } 
+              </Modal.Footer>
+          </Modal>
         );
       }
 }
