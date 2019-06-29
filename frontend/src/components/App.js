@@ -17,22 +17,15 @@ class App extends Component {
         this.state = {
             currentUser: authenticationService.getCurrentUser(),
         };
-        this.logout = this.logout.bind(this);
     }
 
-    logout(event) {
-		authenticationService.logout();
-		this.setState({ currentUser: authenticationService.getCurrentUser()});
-        history.push('/login');
-    }
+    
 
     render() {
-        // надо разобраться с шириной и высотой
-        // ширина зависит от контента, поэтому прыгает при смене чат комнат
         return (
             <Router history={history}>
                 <div className='app-container'>
-					<PrivateRoute exact path="/" component={MainPage} logout={this.logout} />
+					<PrivateRoute exact path="/" component={MainPage} />
 					<Route path="/login" component={WelcomePage} />
                 </div>
             </Router>

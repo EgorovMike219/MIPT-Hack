@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ImageUploader from 'react-images-upload'
 import { Button} from 'react-bootstrap'
-import Auth from './Auth/Auth'
+import Auth from '../Auth/Auth'
 import './MenuLeft.css'
 
 class MenuLeft extends Component {

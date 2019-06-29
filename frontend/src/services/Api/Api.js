@@ -36,8 +36,6 @@ function fetchStatusCheck(response) {
 // Requests
 export const authenticationService = {
     signIn,
-    signUp,
-    logout,
     getCurrentUser,
     getConversations,
     getPublicMessages,
