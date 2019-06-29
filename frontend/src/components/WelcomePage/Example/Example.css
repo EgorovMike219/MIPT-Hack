@@ -1,0 +1,11 @@
+/*.image-container {
+    background-image: 'url(../../../images/welcome_background.jpg)';
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}*/
+
+img {
+    max-width: 100%;
+    heaight: auto;
+}
