@@ -4,6 +4,21 @@ import Example from './Example/Example'
 import './WelcomePage.css';
 
 class WelcomePage extends Component {
+
+      constructor(props) {
+        super(props);
+        
+        this.state = {
+          testEnabled: false
+        };
+
+        this.doTestEnabled = this.doTestEnabled.bind(this);  
+      }
+
+      doTestEnabled() {
+        this.setState({ testEnabled: true });
+      }
+
       render() {
         return (
           <div className='welcome'>
@@ -11,7 +26,7 @@ class WelcomePage extends Component {
               <MenuLeft/>
             </div>
             <div className='example'>
-              <Example/>
+              <Example testEnabled={this.state.testEnabled}/>
             </div>
           </div>
         );

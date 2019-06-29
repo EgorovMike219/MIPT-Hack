@@ -16,7 +16,7 @@ const API_ME = '/api/users/me';
 const API_FIND_USER = '/api/users';
 
 function API_WEBSOCKET() {
-    return 'ws://messenger.westeurope.cloudapp.azure.com/socket/messages?token='+ getCurrentUser().token;
+    return 'ws://messenger.westeurope.cloudapp.azure.com/socket/messages?token=';
 }
 
 function fetchStatusCheck(response) {
@@ -24,7 +24,7 @@ function fetchStatusCheck(response) {
     if (!response.ok) {
         if ([401, 403].indexOf(response.status) !== -1) {
             // это ошибки связанные с авторизацией
-            authenticationService.logout();
+            console.log(response.status);
             // window.location.reload(true);
         }
         const error = response.text() || response.statusText;
@@ -36,16 +36,9 @@ function fetchStatusCheck(response) {
 // Requests
 export const authenticationService = {
     signIn,
-    getCurrentUser,
-    getConversations,
+    getUser,
     getPublicMessages,
-    postPublicMessages,
-    getPrivateMessages,
     postPrivateMessages,
-    getMe,
-    getUserInfo,
-    findUsers,
-    API_WEBSOCKET,
 };
 
 function signIn(login, password, remember) {
@@ -57,113 +50,38 @@ function signIn(login, password, remember) {
         .then(fetchStatusCheck)
         .then(user => {
             // запоминаем пользователя
-            sessionStorage.setItem('token', user.token);
-            sessionStorage.setItem('expires', user.expires);
-            if (remember) {
-                localStorage.setItem('token', user.token);
-                localStorage.setItem('expires', user.expires);
-            }
+            sessionStorage.setItem('login', login);
             return user;
-            })
-        ;
+            }
+        );
     // не забыть поймать искючения в месте где вызываю метод
 }
 
-function signUp(login, password, name, remember) {
-    return fetch(SERVER + API_SIGNUP, {
-        method: 'post',
-        body: JSON.stringify({login: login, password: password, name: name}),
-        headers: { 'content-type': 'application/json' }
-        })
-    .then(fetchStatusCheck)
-    .then(user => {
-        // запоминаем пользователя
-        sessionStorage.setItem('token', user.token);
-        sessionStorage.setItem('expires', user.expires);
-        if (remember) {
-            localStorage.setItem('token', user.token);
-            localStorage.setItem('expires', user.expires);
-        }
-        return user;
-        })
-    ;
-    // не забыть поймать искючения в месте где вызываю метод
-}
-
-function logout() {
-    // удаляем данные о пользователе из хранилища
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('expires');
-    if (localStorage.getItem('token') && localStorage.getItem('expires')) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expires');
-    }
-}
-
-function getCurrentUser() { 
-    // если в хранилище нет currentUser возвращается null
-    if (sessionStorage.getItem('token') && sessionStorage.getItem('expires'))
-        return {"token": sessionStorage.getItem('token'), 
-                "expires": sessionStorage.getItem('expires')};
+function getUser() { 
+    // если в хранилище нет login или картинки или теста возвращается false
+    if (sessionStorage.getItem('login') && sessionStorage.getItem('face')
+        && sessionStorage.getItem('test'))
+        return true;
     else {
-        if (localStorage.getItem('token') && localStorage.getItem('expires')) {
-            sessionStorage.setItem('token', localStorage.getItem('token'));
-            sessionStorage.setItem('expires', localStorage.getItem('expires'));
-            return {"token": sessionStorage.getItem('token'), 
-                    "expires": sessionStorage.getItem('expires')};
-        }
-        return null;
+        return false;
     }
-}
-
-function getConversations() {
-    return fetch(SERVER + API_CONVERSATIONS, {
-            method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
-            })
-        .then(fetchStatusCheck);
-    // не забыть поймать искючения в месте где вызываю метод
 }
 
 function getPublicMessages() {
     return fetch(SERVER + API_PUBLIC_MESSAGES, {
             method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
+            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' }
         })
         .then(fetchStatusCheck);
     // не забыть поймать искючения в месте где вызываю метод
 }
 
-function postPublicMessages(message) {
-    return fetch(SERVER + API_PUBLIC_MESSAGES, {
-            method: 'post',
-            body: JSON.stringify({content: message}),
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
-        })
-        .then(fetchStatusCheck)
-        .then(function(json) {
-            return [json, null]
-        });
-    // не забыть поймать искючения в месте где вызываю метод
-}
-
-function getPrivateMessages(id, from=0, count=9999) {
-    var url = new URL(SERVER + get_user_conservartions(id)),
-        params = { From: from, Count: count}
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    return fetch(url, {
-            method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
-        })
-        .then(fetchStatusCheck);
-    // не забыть поймать искючения в месте где вызываю метод
-}
 
 function postPrivateMessages(id, message) {
     return fetch(SERVER + get_user_conservartions(id), {
             method: 'post',
             body: JSON.stringify({content: message}),
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
+            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer'}
         })
         .then(fetchStatusCheck)
         .then(function(json) {
@@ -172,29 +90,3 @@ function postPrivateMessages(id, message) {
     // не забыть поймать искючения в месте где вызываю метод
 }
 
-function getMe() {
-    return fetch(SERVER + API_ME, {
-            method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
-        })
-        .then(fetchStatusCheck);
-    // не забыть поймать искючения в месте где вызываю метод
-}
-
-function getUserInfo(id) {
-    return fetch(SERVER + get_user_info(id), {
-            method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
-        })
-        .then(fetchStatusCheck);
-    // не забыть поймать искючения в месте где вызываю метод
-}
-
-function findUsers(query) {
-    return fetch(SERVER + API_FIND_USER + '?query=' + query, {
-            method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getCurrentUser().token }
-        })
-        .then(fetchStatusCheck);
-    // не забыть поймать искючения в месте где вызываю метод
-}

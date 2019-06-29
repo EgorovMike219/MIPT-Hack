@@ -5,7 +5,7 @@ import './Auth.css';
 
 class Auth extends Component {
   // в пропах show, handleClose
-	constructor(props) {
+	    constructor(props) {
         super(props);
         
         this.state = {
@@ -35,13 +35,15 @@ class Auth extends Component {
           this.state.password
           ).then(user => {
             //помечаем что чувак заполнил логи и пароль
+            // это делает authenticationService
+            
             // здесь должна быть функция которая проверяет
             // что чувак залогинился, прошел тест, загрузил фотку
             // если все этапы пройдены то мы перебрасываем его на основную страницу с табличкой
 
-            //еще один способ
+            //или другой способ, перебрасываем на начальную стадию, которая делает проверки
             const { from } = this.props.location.state || { from: { pathname: "/" } };
-                this.props.history.push(from);
+            this.props.history.push(from);
             // закрываем окно
             this.props.handleClose();
           }).catch(err => {
