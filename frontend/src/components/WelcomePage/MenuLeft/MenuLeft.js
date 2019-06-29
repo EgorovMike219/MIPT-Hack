@@ -21,12 +21,31 @@ class MenuLeft extends Component {
       }
     
       onDrop(picture) {
-        console.log("uploadPhoto");
-        console.log(picture);
-        this.setState({
-            picture: picture,
+        console.log("uploadPhoto", picture);
+        function base64(file, callback){
+          var coolFile = {};
+          function readerOnload(e){
+            var base64 = btoa(e.target.result);
+            coolFile.base64 = base64;
+            callback(coolFile)
+          };
+        
+          var reader = new FileReader();
+          reader.onload = readerOnload;
+        
+          var file = file[0];
+          coolFile.filetype = file.type;
+          coolFile.size = file.size;
+          coolFile.filename = file.name;
+          reader.readAsBinaryString(file);
+        }
+        base64(picture, (coolFile) => {
+          this.setState({
+              picture: coolFile,
+          });
+          console.log(coolFile);
+          this.props.setPicture(coolFile);
         });
-        this.props.setPicture(picture);
       }
       handleClose() {
         this.setState({ show: false });

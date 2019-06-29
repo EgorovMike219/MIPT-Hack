@@ -11,10 +11,10 @@ class WelcomePage extends Component {
         
         this.state = {
           testEnabled: false,
-          picture: 1,
-          test: 1,
-          login: '',
-          password: '',
+          picture: null,
+          test: null,
+          login: "",
+          password: "",
           requestingServer: false,
         };
 
@@ -23,6 +23,7 @@ class WelcomePage extends Component {
         this.setTest = this.setTest.bind(this);
         this.setLoginPassword = this.setLoginPassword.bind(this);
         this.checkInput = this.checkInput.bind(this);
+        this.checkInput();
       }
 
       doTestEnabled() {
@@ -32,8 +33,8 @@ class WelcomePage extends Component {
       checkInput() {
         if (this.state.picture &&
             this.state.test &&
-            this.state.login!=='' && 
-            this.state.password!=='') {
+            this.state.login != '' && 
+            this.state.password != '') {
           // переключаемся в состояние ожидания ответа сервера
           this.setState({ requestingServer: true});
           console.log("Upload data");
@@ -50,28 +51,34 @@ class WelcomePage extends Component {
               const { from } = this.props.location.state || { from: { pathname: "/" } };
               this.props.history.push(from);
             }).catch(err => {
-              this.handleError(err);
+              // говорим что ожидание закончилось
+              this.setState({ requestingServer: false});
               console.log("Error logging in", err);
           });
         }
       }
 
       setPicture(picture) {
-        this.setState({ picture: picture });
-        this.checkInput();
+        this.setState({ picture: picture 
+        }, () => {
+          this.checkInput();
+        });
       }
 
       setTest(test) {
-        this.setState({ test: test });
-        this.checkInput();
+        this.setState({ test: test 
+        }, () => {
+          this.checkInput();
+        });
       }
 
       setLoginPassword(login, password) {
         this.setState({ 
           login: login,
           password: password
-         });
-        this.checkInput();
+        }, () => {
+           this.checkInput();
+        });
       }
 
       render() {

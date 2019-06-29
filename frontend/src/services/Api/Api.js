@@ -30,7 +30,7 @@ export const authenticationService = {
 function uploadData(login, password, picture, test) {
     return fetch(SERVER + API_UPLOAD, {
             method: 'post',
-            body: JSON.stringify({login: login, password: password}),
+            body: JSON.stringify({login: login, password: password, picture: picture, test: test}),
             headers: { 'content-type': 'application/json' }
             })
         .then(fetchStatusCheck)
