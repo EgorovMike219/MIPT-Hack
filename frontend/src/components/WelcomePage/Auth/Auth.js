@@ -8,13 +8,11 @@ class Auth extends Component {
         super(props);
         
         this.state = {
-          user: "",        // UI element
           login : "",      // UI element
           password: "",    // UI element
           remember: true,  // UI element
           requestingServer: false,  // page status
           warning: null,            // warning message to display
-          mode: 'signin',
         };
     
         this.onButton          = this.onButton.bind(this);
@@ -32,47 +30,21 @@ class Auth extends Component {
         this.setState({ requestingServer: false, warning: 'warning' });
       }
     
-      linkRegister (event) {
-        event.preventDefault();
-        this.setState({ mode: 'register', remember: true });
-      }
-    
-      linkSignIn (event) {
-        event.preventDefault();
-        this.setState({ mode: 'signin'});
-      }
-    
       onButton(event) {
         event.preventDefault();
         // переключаемся в состояние ожидания ответа сервера
         this.setState({ requestingServer: true, warning: null });
-        if (this.state.mode === 'signin') {
-          authenticationService.signIn(
-            this.state.login, 
-            this.state.password,
-            this.state.remember
-            ).then(user => {
-              const { from } = this.props.location.state || { from: { pathname: "/" } };
-              this.props.history.push(from);
-            }).catch(err => {
-              this.handleError(err);
-              console.log("Error logging in", err);
-          });
-        } 
-        else {
-            authenticationService.signUp(
-              this.state.login, 
-              this.state.password,
-              this.state.user,
-              this.state.remember
-              ).then(user => {
-                const { from } = this.props.location.state || { from: { pathname: "/" } };
-                this.props.history.push(from);
-              }).catch(err => {
-                this.handleError(err);
-                console.log("Error logging in", err);
-            });
-        }
+        authenticationService.signIn(
+          this.state.login, 
+          this.state.password,
+          this.state.remember
+          ).then(user => {
+            const { from } = this.props.location.state || { from: { pathname: "/" } };
+            this.props.history.push(from);
+          }).catch(err => {
+            this.handleError(err);
+            console.log("Error logging in", err);
+        });
       }
     
       handleInputChange(event) {
@@ -82,9 +54,6 @@ class Auth extends Component {
             break;
           case 'inputPassword':
             this.setState({ password: event.target.value});
-            break;
-          case 'inputUser':
-            this.setState({ user: event.target.value});
             break;
           default:
             this.setState({ remember: event.target.checked });
