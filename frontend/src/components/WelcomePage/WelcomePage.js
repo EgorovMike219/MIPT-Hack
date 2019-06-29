@@ -32,8 +32,8 @@ class WelcomePage extends Component {
       checkInput() {
         if (this.state.picture &&
             this.state.test &&
-            this.state.login!='' && 
-            this.state.password!='') {
+            this.state.login!=='' && 
+            this.state.password!=='') {
           // переключаемся в состояние ожидания ответа сервера
           this.setState({ requestingServer: true});
           authenticationService.uploadData(this.state.login,
@@ -80,7 +80,8 @@ class WelcomePage extends Component {
             <div className='welcome'>
               <div className='menuleft'>
                 <MenuLeft setPicture={this.setPicture} 
-                    setLoginPassword={this.setLoginPassword}/>
+                    setLoginPassword={this.setLoginPassword}
+                    doTestEnabled={this.doTestEnabled} />
               </div>
               <div className='example'>
                 <Example testEnabled={this.state.testEnabled} setTest={this.setTest}/>

@@ -2,14 +2,9 @@ import React, { Component } from 'react'
 import ImageUploader from 'react-images-upload'
 import { Button} from 'react-bootstrap'
 import Auth from '../Auth/Auth'
-import {authenticationService} from '../../../services/Api/Api'
 import './MenuLeft.css'
 
 class MenuLeft extends Component {
-    // нужно проверить что выолнены все условия
-    // чувак залогинился на гитхабе
-    // чувак загрузил фотку
-    // чувак прошел тест
 	constructor(props) {
         super(props);
 
@@ -18,16 +13,11 @@ class MenuLeft extends Component {
             show: false, 
         };
 
-        this.connectToGitHub = this.connectToGitHub.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.passTest = this.passTest.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
-      }
-    
-      connectToGitHub(event) {
-          console.log("connect to gitHub")
       }
     
       onDrop(picture) {
@@ -36,18 +26,7 @@ class MenuLeft extends Component {
         this.setState({
             picture: picture,
         });
-        authenticationService.loadImage(picture[0])
-          .then(response => {
-            this.setState({ 
-              uploading: false,
-            })
-          })
-          .catch(err => {
-              this.setState({ 
-                uploading: false,
-              });
-              console.log("Error logging in", err);
-        });
+        this.props.setPicture(picture);
       }
       handleClose() {
         this.setState({ show: false });
@@ -58,7 +37,9 @@ class MenuLeft extends Component {
       }
 
       passTest(event) {
-        console.log("pass the test")
+        console.log("pass the test");
+        event.preventDefault();
+        this.props.doTestEnabled();
       }
     
       render() {
@@ -70,11 +51,13 @@ class MenuLeft extends Component {
                         Connect to GitHub
                     </Button>
                     {/* <!-- Модальное окно авторизации -->   */}
-                    <Auth show={this.state.show} handleClose={this.handleClose}/>
+                    <Auth show={this.state.show}
+                      handleClose={this.handleClose}
+                      setLoginPassword={this.props.setLoginPassword}/>
                     <ImageUploader
                         withIcon={true}
                         buttonText='Choose images'
-                        onChange={this.uploadPhoto}
+                        onChange={this.onDrop}
                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
                         maxFileSize={5242880}
                     />

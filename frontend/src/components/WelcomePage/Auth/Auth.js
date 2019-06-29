@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {authenticationService} from '../../../services/Api/Api'
 import { Button, Modal, Form } from 'react-bootstrap'
 import './Auth.css';
 
@@ -28,28 +27,9 @@ class Auth extends Component {
       onSubmit(event) {
         console.log('submit');
         event.preventDefault();
-        // переключаемся в состояние ожидания ответа сервера
-        this.setState({ requestingServer: true, warning: null });
-        authenticationService.signIn(
-          this.state.login, 
-          this.state.password
-          ).then(user => {
-            //помечаем что чувак заполнил логи и пароль
-            // это делает authenticationService
-            
-            // здесь должна быть функция которая проверяет
-            // что чувак залогинился, прошел тест, загрузил фотку
-            // если все этапы пройдены то мы перебрасываем его на основную страницу с табличкой
-
-            //или другой способ, перебрасываем на начальную стадию, которая делает проверки
-            const { from } = this.props.location.state || { from: { pathname: "/" } };
-            this.props.history.push(from);
-            // закрываем окно
-            this.props.handleClose();
-          }).catch(err => {
-            this.handleError(err);
-            console.log("Error logging in", err);
-        });
+        this.props.setLoginPassword(this.state.login, this.state.password);
+        // закрываем окно
+        this.props.handleClose();
       }
     
       handleInputChange(event) {

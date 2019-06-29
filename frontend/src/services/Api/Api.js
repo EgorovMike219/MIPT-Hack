@@ -1,24 +1,10 @@
 const SERVER = 'http://messenger.westeurope.cloudapp.azure.com';
-// Authentication
-const API_SIGNIN = '/api/authentication/signin';
-// Upload image
-const API_IMAGE_UPLOAD = '/api/authentication/signin';
-//Conversations
-const API_CONVERSATIONS = '/api/conversations';
-function get_user_conservartions(userId) {
-    return `/api/conversations/${userId}/messages`;
-}
-const API_PUBLIC_MESSAGES = '/api/conversations/public/messages';
-//Users
-function get_user_info(userId) {
-    return `/api/users/${userId}`;
-}
-const API_ME = '/api/users/me';
-const API_FIND_USER = '/api/users';
+// Upload data
+const API_UPLOAD = '/upload';
 
-function API_WEBSOCKET() {
-    return 'ws://messenger.westeurope.cloudapp.azure.com/socket/messages?token=';
-}
+// Get result
+const API_RESULT = '/result';
+
 
 function fetchStatusCheck(response) {
     // console.log(response)
@@ -36,16 +22,13 @@ function fetchStatusCheck(response) {
 
 // Requests
 export const authenticationService = {
-    signIn,
-    loadImage,
     uploadData,
-    getUser,
-    getPublicMessages,
-    postPrivateMessages,
+    getResult,
+    getUser
 };
 
 function uploadData(login, password, picture, test) {
-    return fetch(SERVER + API_SIGNIN, {
+    return fetch(SERVER + API_UPLOAD, {
             method: 'post',
             body: JSON.stringify({login: login, password: password}),
             headers: { 'content-type': 'application/json' }
@@ -60,59 +43,21 @@ function uploadData(login, password, picture, test) {
     // не забыть поймать искючения в месте где вызываю метод
 }
 
-function signIn(login, password, remember) {
-    return fetch(SERVER + API_SIGNIN, {
-            method: 'post',
-            body: JSON.stringify({login: login, password: password}),
-            headers: { 'content-type': 'application/json' }
-            })
-        .then(fetchStatusCheck)
-        .then(user => {
-            // запоминаем пользователя
-            sessionStorage.setItem('login', login);
-            return user;
-            }
-        );
+function getResult() {
+    return fetch(SERVER + API_RESULT, {
+            method: 'get',
+            headers: { 'content-type': 'application/json'}
+        })
+        .then(fetchStatusCheck);
     // не забыть поймать искючения в месте где вызываю метод
-}
-
-function loadImage(image) {
-    return fetch(SERVER + API_IMAGE_UPLOAD, {
-        method: 'post',
-        body: image
-      })
-      .then(fetchStatusCheck);
 }
 
 function getUser() { 
-    // если в хранилище нет login или картинки или теста возвращается false
+    // если в хранилище нет login false - 
+    // это означает пользователь не закончил заполнять о себе данные
     if (sessionStorage.getItem('login'))
         return true;
     else {
         return false;
     }
 }
-
-function getPublicMessages() {
-    return fetch(SERVER + API_PUBLIC_MESSAGES, {
-            method: 'get',
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' }
-        })
-        .then(fetchStatusCheck);
-    // не забыть поймать искючения в месте где вызываю метод
-}
-
-
-function postPrivateMessages(id, message) {
-    return fetch(SERVER + get_user_conservartions(id), {
-            method: 'post',
-            body: JSON.stringify({content: message}),
-            headers: { 'content-type': 'application/json', 'Authorization': 'Bearer'}
-        })
-        .then(fetchStatusCheck)
-        .then(function(json) {
-            return [json, id]
-        });
-    // не забыть поймать искючения в месте где вызываю метод
-}
-
