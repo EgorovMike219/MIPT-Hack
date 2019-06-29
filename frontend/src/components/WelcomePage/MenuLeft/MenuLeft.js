@@ -5,35 +5,28 @@ import Auth from '../Auth/Auth'
 import './MenuLeft.css'
 
 class MenuLeft extends Component {
-    // нужно проверить что выолнены все условия
-    // чувак залогинился на гитхабе
-    // чувак загрузил фотку
-    // чувак прошел тест
 	constructor(props) {
         super(props);
 
         this.state = { 
-            pictures: [],
+            picture: null,
             show: false, 
         };
 
-        this.connectToGitHub = this.connectToGitHub.bind(this);
-        this.uploadPhoto = this.uploadPhoto.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.passTest = this.passTest.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
       }
     
-      connectToGitHub(event) {
-          console.log("connect to gitHub")
-      }
-    
-      uploadPhoto(picture) {
+      onDrop(picture) {
         console.log("uploadPhoto");
+        console.log(picture);
         this.setState({
-            pictures: this.state.pictures.concat(picture),
+            picture: picture,
         });
+        this.props.setPicture(picture);
       }
       handleClose() {
         this.setState({ show: false });
@@ -44,7 +37,9 @@ class MenuLeft extends Component {
       }
 
       passTest(event) {
-        console.log("pass the test")
+        console.log("pass the test");
+        event.preventDefault();
+        this.props.doTestEnabled();
       }
     
       render() {
@@ -56,11 +51,13 @@ class MenuLeft extends Component {
                         Connect to GitHub
                     </Button>
                     {/* <!-- Модальное окно авторизации -->   */}
-                    <Auth show={this.state.show} handleClose={this.handleClose}/>
+                    <Auth show={this.state.show}
+                      handleClose={this.handleClose}
+                      setLoginPassword={this.props.setLoginPassword}/>
                     <ImageUploader
                         withIcon={true}
                         buttonText='Choose images'
-                        onChange={this.uploadPhoto}
+                        onChange={this.onDrop}
                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
                         maxFileSize={5242880}
                     />
