@@ -33,8 +33,8 @@ class WelcomePage extends Component {
       checkInput() {
         if (this.state.picture &&
             this.state.test &&
-            this.state.login != '' && 
-            this.state.password != '') {
+            this.state.login !== '' && 
+            this.state.password !== '') {
           // переключаемся в состояние ожидания ответа сервера
           this.setState({ requestingServer: true});
           console.log("Upload data");
