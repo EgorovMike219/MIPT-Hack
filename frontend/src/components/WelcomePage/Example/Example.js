@@ -12,10 +12,22 @@ class Example extends Component {
         super(props);
         
         this.state = {
-            testEnabled: this.props.testEnabled,
+            testEnabled: false,
             setTest: this.props.setTest
         };
     }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.testEnabled !== this.props.testEnabled) {
+          // У this.props.myProp изменилось значение
+          // Поэтому мы можем выполнять любые операции для которых
+          // нужны новые значения и/или выполнять сайд-эффекты
+          // вроде AJAX вызовов с новым значением - this.props.myProp
+          this.setState({
+              testEnabled: this.props.testEnabled
+            });
+        }
+      }
 
     onComplete(survey, options) {
         let answer_to_int = {"Not at All": 0, 
