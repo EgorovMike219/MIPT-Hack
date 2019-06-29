@@ -13,8 +13,8 @@ class WelcomePage extends Component {
           testEnabled: false,
           picture: null,
           test: null,
-          login: "",
-          password: "",
+          login: '',
+          password: '',
           requestingServer: false,
         };
 

@@ -12,7 +12,8 @@
     "react-images-upload": "^1.2.7",
     "react-router-dom": "5.0.1",
     "react-scripts": "3.0.1",
-    "resolve-url-loader": "^3.1.0"
+    "resolve-url-loader": "^3.1.0",
+    "survey-react": "^1.0.95"
   },
   "scripts": {
     "start": "react-scripts start",
