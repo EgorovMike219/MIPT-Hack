@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
@@ -18,25 +18,19 @@ def user_upload(request):
     """
     Upload view for the user.
     """
-    r = upload(request)
-    if type(r) == int:
-        return HttpResponseRedirect('/result?id={}'.format(r))
+    answer = upload(request)
+    if len(answer) == 4:
+        login = answer[0] 
+        password = answer[1]
+        image = answer[2]
+        test = answer[3]
+        # data = result(login, password, image, test)
+        data = []
+        with open('dataset.tsv', 'r') as f:
+            keys = f.readline().strip().split('\t')
+            for line in f.readlines():
+                line = line.strip().split('\t')
+                data.append(line)
+        return JsonResponse(data)
     else:
-        return r
-
-
-@api_view(['GET'])
-def user_result(request):
-    """
-    Result view for the user.
-    Renders a failure page in case an image has not been processed yet
-    """
-    r = result(request)
-    if r is None:
-        return HttpResponse(render_to_string('processing.html', {'id': request.GET['id']}))
-    if type(r) == dict:
-        return HttpResponse(render_to_string('result.html', r))
-    else:
-        if r.status_code == HTTP_404_NOT_FOUND:
-            return HttpResponseNotFound()
-        return r
+        return HttpResponse(status=400)

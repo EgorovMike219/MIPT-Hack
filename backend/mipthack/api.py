@@ -35,8 +35,8 @@ def upload(request):
         image = stringToRGB(img_data)
         cv2.imwrite('image.png',image)
         test = data['test']
-        return 1
-    return "0"
+        return [login, password, image, test]
+    return [0]
 
 def upload1(request):
     """
