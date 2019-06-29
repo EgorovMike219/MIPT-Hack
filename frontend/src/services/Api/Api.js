@@ -1,4 +1,4 @@
-const SERVER = 'http://messenger.westeurope.cloudapp.azure.com';
+const SERVER = 'http://localhost:8080';
 // Upload data
 const API_UPLOAD = '/upload';
 

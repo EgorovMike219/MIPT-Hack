@@ -11,8 +11,8 @@ class WelcomePage extends Component {
         
         this.state = {
           testEnabled: false,
-          picture: null,
-          test: null,
+          picture: 1,
+          test: 1,
           login: '',
           password: '',
           requestingServer: false,
@@ -36,6 +36,7 @@ class WelcomePage extends Component {
             this.state.password!=='') {
           // переключаемся в состояние ожидания ответа сервера
           this.setState({ requestingServer: true});
+          console.log("Upload data");
           authenticationService.uploadData(this.state.login,
             this.state.password, this.state.picture, this.state.test
             ).then(user => {
@@ -57,10 +58,12 @@ class WelcomePage extends Component {
 
       setPicture(picture) {
         this.setState({ picture: picture });
+        this.checkInput();
       }
 
       setTest(test) {
         this.setState({ test: test });
+        this.checkInput();
       }
 
       setLoginPassword(login, password) {
@@ -68,6 +71,7 @@ class WelcomePage extends Component {
           login: login,
           password: password
          });
+        this.checkInput();
       }
 
       render() {

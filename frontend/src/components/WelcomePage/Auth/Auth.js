@@ -27,9 +27,9 @@ class Auth extends Component {
       onSubmit(event) {
         console.log('submit');
         event.preventDefault();
-        this.props.setLoginPassword(this.state.login, this.state.password);
         // закрываем окно
         this.props.handleClose();
+        this.props.setLoginPassword(this.state.login, this.state.password);
       }
     
       handleInputChange(event) {
