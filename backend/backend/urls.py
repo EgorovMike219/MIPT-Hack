@@ -27,7 +27,6 @@ from django.conf.urls.static import static
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 
-from populate.views import *
 
 @api_view(['GET'])
 def perform_test(request):
@@ -42,14 +41,8 @@ urlpatterns = [
     path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/auth/token/obtain/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    # path('api/notes/', include('notes.urls')),
     path('api/testing/', perform_test),
     path('api/auth/register/', Registration.as_view()),
-    # path('api/tags/', include('tags.urls')),
-
-    # path('populate/users/<int:total>', populate_users),
-    # path('populate/notes/<int:total>', populate_notes),
-    # path('populate/note_votes/<int:percent_likes>', populate_votes)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
