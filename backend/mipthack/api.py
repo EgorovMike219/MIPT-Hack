@@ -46,8 +46,8 @@ def check(value):
     else:
         return 9
 
-#Output: {'JavaScript': 9, 'Python': 8, 'CSS': 9, 'HTML': 9, 'Assembly': 4, 'C': 8, 'C++': 8, 'Shell': 5, 'Jupyter Notebook': 9,
-# 'CMake': 5, 'Java': 9, 'Yacc': 6, 'Lex': 5, 'Ruby': 5, 'PowerShell': 3, 'TeX': 9, 'C#': 8, 'API Blueprint':  'Makefile': 5, 'Perl 6': 4, 'Handlebars': 4, 'PHP': 1}
+#Output: {'JavaScript': 'Python': 'CSS': 'HTML': 'Assembly': 'C': 'C++': 'Shell': 'Jupyter Notebook':
+# 'CMake': 'Java': 'Yacc': 'Lex': 'Ruby': 'PowerShell': 'TeX': 'C#': 'API Blueprint':  'Makefile': 'Perl 6': 'Handlebars': 'PHP': 1}
 
 def get_languages_data(user, password):
     # using username and password
@@ -282,147 +282,147 @@ def result(login, password, image, test):
     data9 = []
     data10 = []
 
-    data1.append([0, 0, react_native, "React Native"])
-    data1.append([0, 1, swift, "Swift"])
-    data1.append([0, 2, winapi, "Win Api"])
-    data1.append([0, 3, cpp, "C++"])
-    data1.append([0, 4, c_sharp, "C#"])
-    data1.append([0, 5, java, "Java"])
-    data1.append([0, 6, python, "Python"])
-    data1.append([0, 7, qt, "Qt"])
-    data1.append([0, 8, go, "Go"])
-    data1.append([0, 9, electron, "Electron"])
+    data1.append(["Desktop", react_native, "React Native"])
+    data1.append(["Desktop", swift, "Swift"])
+    data1.append(["Desktop", winapi, "Win Api"])
+    data1.append(["Desktop", cpp, "C++"])
+    data1.append(["Desktop", c_sharp, "C#"])
+    data1.append(["Desktop", java, "Java"])
+    data1.append(["Desktop", python, "Python"])
+    data1.append(["Desktop", qt, "Qt"])
+    data1.append(["Desktop", go, "Go"])
+    data1.append(["Desktop", electron, "Electron"])
 
     sum_data1 = react_native + swift + winapi + cpp + c_sharp + java + python + qt + go + electron
 
-    data2.append([1, 0, test[0] * 2, "Leadership"])
-    data2.append([1, 1, test[0] * 2, "Management"])
-    data2.append([1, 2, test[1] * 2, "Problem Solving"])
-    data2.append([1, 3, test[1] * 2, "Decision Making"])
-    data2.append([1, 4, test[2] * 2, "Listening"])
-    data2.append([1, 5, test[2] * 2, "Speaking"])
-    data2.append([1, 6, test[3] * 2, "Self-Confidence"])
-    data2.append([1, 7, test[3] * 2, "Positive-thinking"])
-    data2.append([1, 8, test[4] * 2, "Prioritisation"])
-    data2.append([1, 9, test[4] * 2, "Scheduling"])
+    data2.append(["Soft Skills", test[0] * 2, "Leadership"])
+    data2.append(["Soft Skills", test[0] * 2, "Management"])
+    data2.append(["Soft Skills", test[1] * 2, "Problem Solving"])
+    data2.append(["Soft Skills", test[1] * 2, "Decision Making"])
+    data2.append(["Soft Skills", test[2] * 2, "Listening"])
+    data2.append(["Soft Skills", test[2] * 2, "Speaking"])
+    data2.append(["Soft Skills", test[3] * 2, "Self-Confidence"])
+    data2.append(["Soft Skills", test[3] * 2, "Positive-thinking"])
+    data2.append(["Soft Skills", test[4] * 2, "Prioritisation"])
+    data2.append(["Soft Skills", test[4] * 2, "Scheduling"])
 
     sum_data2 = sum(test) * 2
 
-    data3.append([2, 0, python, "Python"])
-    data3.append([2, 1, r, "R"])
-    data3.append([2, 2, cpp, "C++"])
-    data3.append([2, 3, scala, "Scala"])
-    data3.append([2, 4, swift, "Swift"])
-    data3.append([2, 5, jupyter_notebook, "Jupyter Notebook"])
-    data3.append([2, 6, tensorflow, "TensorFlow"])
-    data3.append([2, 7, mathematics, "Mathematics"])
-    data3.append([2, 8, pytorch, "PyTorch"])
-    data3.append([2, 9, keras, "Keras"])
+    data3.append(["ML", python, "Python"])
+    data3.append(["ML", r, "R"])
+    data3.append(["ML", cpp, "C++"])
+    data3.append(["ML", scala, "Scala"])
+    data3.append(["ML", swift, "Swift"])
+    data3.append(["ML", jupyter_notebook, "Jupyter Notebook"])
+    data3.append(["ML", tensorflow, "TensorFlow"])
+    data3.append(["ML", mathematics, "Mathematics"])
+    data3.append(["ML", pytorch, "PyTorch"])
+    data3.append(["ML", keras, "Keras"])
 
     sum_data3 = python + r + cpp + scala + swift + jupyter_notebook + tensorflow + mathematics + pytorch + keras
 
-    data4.append([3, 0, js, "JavaScript"])
-    data4.append([3, 1, css, "CSS"])
-    data4.append([3, 2, html, "HTML"])
-    data4.append([3, 3, jquery, "JQuery"])
-    data4.append([3, 4, reactjs, "ReactJS"])
-    data4.append([3, 5, angular, "Angular"])
-    data4.append([3, 6, typescript, "TypeScript"])
-    data4.append([3, 7, vuejs, "VueJS"])
-    data4.append([3, 8, bootstrap, "Bootstrap"])
-    data4.append([3, 9, restapi, "REST API"])
+    data4.append(["FrontEnd", js, "JavaScript"])
+    data4.append(["FrontEnd", css, "CSS"])
+    data4.append(["FrontEnd", html, "HTML"])
+    data4.append(["FrontEnd", jquery, "JQuery"])
+    data4.append(["FrontEnd", reactjs, "ReactJS"])
+    data4.append(["FrontEnd", angular, "Angular"])
+    data4.append(["FrontEnd", typescript, "TypeScript"])
+    data4.append(["FrontEnd", vuejs, "VueJS"])
+    data4.append(["FrontEnd", bootstrap, "Bootstrap"])
+    data4.append(["FrontEnd", restapi, "REST API"])
 
     sum_data4 = js + css + html + jquery + reactjs + angular + typescript + vuejs + bootstrap + restapi
 
-    data5.append([4, 0, python, "Python"])
-    data5.append([4, 1, java, "Java"])
-    data5.append([4, 2, c, "C"])
-    data5.append([4, 3, cpp, "C++"])
-    data5.append([4, 4, c_sharp, "C#"])
-    data5.append([4, 5, php, "PHP"])
-    data5.append([4, 6, ruby, "Ruby"])
-    data5.append([4, 7, sql, "SQL"])
-    data5.append([4, 8, cmake, "CMake"])
-    data5.append([4, 9, djangofreim, "Django"])
+    data5.append(["BackEnd", python, "Python"])
+    data5.append(["BackEnd", java, "Java"])
+    data5.append(["BackEnd", c, "C"])
+    data5.append(["BackEnd", cpp, "C++"])
+    data5.append(["BackEnd", c_sharp, "C#"])
+    data5.append(["BackEnd", php, "PHP"])
+    data5.append(["BackEnd", ruby, "Ruby"])
+    data5.append(["BackEnd", sql, "SQL"])
+    data5.append(["BackEnd", cmake, "CMake"])
+    data5.append(["BackEnd", djangofreim, "Django"])
 
     sum_data5 = python + java + c + cpp + c_sharp + php + ruby + sql + cmake + djangofreim
 
-    data6.append([5, 0, python, "Python"])
-    data6.append([5, 1, shell, "Shell"])
-    data6.append([5, 2, perl, "Perl"])
-    data6.append([5, 3, cpp, "C++"])
-    data6.append([5, 4, c, "C"])
-    data6.append([5, 5, linux, "Linux"])
-    data6.append([5, 6, protocols, "Protocols"])
-    data6.append([5, 7, winapi, "Win Api"])
-    data6.append([5, 8, apach, "Apach"])
-    data6.append([5, 9, nginx, "Nginx"])
+    data6.append(["DevOps", python, "Python"])
+    data6.append(["DevOps", shell, "Shell"])
+    data6.append(["DevOps", perl, "Perl"])
+    data6.append(["DevOps", cpp, "C++"])
+    data6.append(["DevOps", c, "C"])
+    data6.append(["DevOps", linux, "Linux"])
+    data6.append(["DevOps", protocols, "Protocols"])
+    data6.append(["DevOps", winapi, "Win Api"])
+    data6.append(["DevOps", apach, "Apach"])
+    data6.append(["DevOps", nginx, "Nginx"])
 
     sum_data6 = python + shell + perl + cpp + c + linux + protocols + winapi + apach + nginx
 
-    data7.append([6, 0, swift, "Swift"])
-    data7.append([6, 1, java, "Java"])
-    data7.append([6, 2, kotlin, "Kotlin"])
-    data7.append([6, 3, objectivec, "Objective-C"])
-    data7.append([6, 4, mobile_angular, "Mobile Angular UI"])
-    data7.append([6, 5, react_native, "React Native"])
-    data7.append([6, 6, xamarin, "Xamarin"])
-    data7.append([6, 7, flutter, "Flutter"])
-    data7.append([6, 8, apach, "Apach"])
-    data7.append([6, 9, ionic, "Ionic"])
+    data7.append(["MobileDev", swift, "Swift"])
+    data7.append(["MobileDev", java, "Java"])
+    data7.append(["MobileDev", kotlin, "Kotlin"])
+    data7.append(["MobileDev", objectivec, "Objective-C"])
+    data7.append(["MobileDev", mobile_angular, "Mobile Angular UI"])
+    data7.append(["MobileDev", react_native, "React Native"])
+    data7.append(["MobileDev", xamarin, "Xamarin"])
+    data7.append(["MobileDev", flutter, "Flutter"])
+    data7.append(["MobileDev", apach, "Apach"])
+    data7.append(["MobileDev", ionic, "Ionic"])
 
     sum_data7 = swift + java + kotlin + objectivec + mobile_angular + react_native + xamarin + flutter + apach + ionic
 
-    data8.append([7, 0, c_sharp, "C#"])
-    data8.append([7, 1, cpp, "C++"])
-    data8.append([7, 2, opengl, "OpenGL"])
-    data8.append([7, 3, cuda, "CUDA"])
-    data8.append([7, 4, unity, "Unity"])
-    data8.append([7, 5, unreal_engine, "Unreal Engine"])
-    data8.append([7, 6, augmented_knowledge, "Augmented Knowledge"])
-    data8.append([7, 7, modeling3d, "3D modeling"])
-    data8.append([7, 8, audio_knowledge, "Audio Knowledge"])
-    data8.append([7, 9, vr, "Virtual Reality"])
+    data8.append(["GameDev", c_sharp, "C#"])
+    data8.append(["GameDev", cpp, "C++"])
+    data8.append(["GameDev", opengl, "OpenGL"])
+    data8.append(["GameDev", cuda, "CUDA"])
+    data8.append(["GameDev", unity, "Unity"])
+    data8.append(["GameDev", unreal_engine, "Unreal Engine"])
+    data8.append(["GameDev", augmented_knowledge, "Augmented Knowledge"])
+    data8.append(["GameDev", modeling3d, "3D modeling"])
+    data8.append(["GameDev", audio_knowledge, "Audio Knowledge"])
+    data8.append(["GameDev", vr, "Virtual Reality"])
 
     sum_data8 = c_sharp + cpp + opengl + cuda + unity + unreal_engine + augmented_knowledge + modeling3d + audio_knowledge + vr
 
-    data9.append([8, 0, python, "Python"])
-    data9.append([8, 1, cpp, "C++"])
-    data9.append([8, 2, java, "Java"])
-    data9.append([8, 3, c, "C"])
-    data9.append([8, 4, go, "Go"])
-    data9.append([8, 5, c_sharp, "C#"])
-    data9.append([8, 6, php, "PHP"])
-    data9.append([8, 7, unit_test, "Unit test"])
-    data9.append([8, 8, google_test, "Google test"])
-    data9.append([8, 9, test_knowledge, "Test Knowledge"])
+    data9.append(["Test", python, "Python"])
+    data9.append(["Test", cpp, "C++"])
+    data9.append(["Test", java, "Java"])
+    data9.append(["Test", c, "C"])
+    data9.append(["Test", go, "Go"])
+    data9.append(["Test", c_sharp, "C#"])
+    data9.append(["Test", php, "PHP"])
+    data9.append(["Test", unit_test, "Unit test"])
+    data9.append(["Test", google_test, "Google test"])
+    data9.append(["Test", test_knowledge, "Test Knowledge"])
 
     sum_data9 = python + cpp + java + c + go + c_sharp + php + unit_test + google_test + test_knowledge
 
-    data10.append([9, 0, ml_data[0], "Attractive"])
-    data10.append([9, 1, ml_data[1], "Caring"])
-    data10.append([9, 2, ml_data[2], "Aggressive"])
-    data10.append([9, 3, ml_data[3], "Intelligent"])
-    data10.append([9, 4, ml_data[4], "Confident"])
-    data10.append([9, 5, ml_data[5], "Emotionally stable"])
-    data10.append([9, 6, ml_data[6], "Trustworthy"])
-    data10.append([9, 7, ml_data[7], "Responsible"])
-    data10.append([9, 8, ml_data[8], "Unhappy"])
-    data10.append([9, 9, ml_data[9], "Dominant"])
+    data10.append(["Personality", ml_data[0], "Attractive"])
+    data10.append(["Personality", ml_data[1], "Caring"])
+    data10.append(["Personality", ml_data[2], "Aggressive"])
+    data10.append(["Personality", ml_data[3], "Intelligent"])
+    data10.append(["Personality", ml_data[4], "Confident"])
+    data10.append(["Personality", ml_data[5], "Emotionally stable"])
+    data10.append(["Personality", ml_data[6], "Trustworthy"])
+    data10.append(["Personality", ml_data[7], "Responsible"])
+    data10.append(["Personality", ml_data[8], "Unhappy"])
+    data10.append(["Personality", ml_data[9], "Dominant"])
     sum_data10 = sum(ml_data)
 
     sum_data = [[sum_data1, 1], [sum_data2, 2], [sum_data3, 3], [sum_data4, 4], [sum_data5,5], [sum_data6,6], [sum_data7,7], [sum_data8,8], [sum_data9,9], [sum_data10,10]]
 
-    data1.sort(key=lambda x: x[2], reverse=True)
-    data2.sort(key=lambda x: x[2], reverse=True)
-    data3.sort(key=lambda x: x[2], reverse=True)
-    data4.sort(key=lambda x: x[2], reverse=True)
-    data5.sort(key=lambda x: x[2], reverse=True)
-    data6.sort(key=lambda x: x[2], reverse=True)
-    data7.sort(key=lambda x: x[2], reverse=True)
-    data8.sort(key=lambda x: x[2], reverse=True)
-    data9.sort(key=lambda x: x[2], reverse=True)
-    data10.sort(key=lambda x: x[2], reverse=True)
+    data1.sort(key=lambda x: x[1], reverse=True)
+    data2.sort(key=lambda x: x[1], reverse=True)
+    data3.sort(key=lambda x: x[1], reverse=True)
+    data4.sort(key=lambda x: x[1], reverse=True)
+    data5.sort(key=lambda x: x[1], reverse=True)
+    data6.sort(key=lambda x: x[1], reverse=True)
+    data7.sort(key=lambda x: x[1], reverse=True)
+    data8.sort(key=lambda x: x[1], reverse=True)
+    data9.sort(key=lambda x: x[1], reverse=True)
+    data10.sort(key=lambda x: x[1], reverse=True)
 
     data = []
 
@@ -473,7 +473,11 @@ def result(login, password, image, test):
             for x in data10:
                 data.append(x)
 
-    #print(data)
+    ind = 0
+    for x in range(1, 11):
+        for y in range(1, 11):
+           data[ind] += [x, y]
+           ind += 1
 
     return data
 
