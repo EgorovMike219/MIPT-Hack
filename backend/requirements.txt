@@ -7,3 +7,4 @@ django
 pika
 Pillow
 opencv-python
+PyGithub

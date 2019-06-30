@@ -24,8 +24,7 @@ def user_upload(request):
         password = answer[1]
         image = answer[2]
         test = answer[3]
-        # data = result(login, password, image, test)
-        data = []
+        data = result(login, password, image, test)
         with open('dataset.tsv', 'r') as f:
             keys = f.readline().strip().split('\t')
             for line in f.readlines():

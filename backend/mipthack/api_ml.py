@@ -1,5 +1,6 @@
 import pika
 from json import dumps, loads
+import random
 
 
 QUEUE_IMAGES = 'images'
@@ -70,3 +71,43 @@ def receive_from_ml(id: int) -> str or None:
     print(db)
     print("ID is {}".format(id))
     return db.get(int(id))
+
+# Attractive
+# Caring
+# Aggressive
+# Intelligent
+# Confident
+# Emotionally stable
+# Trustworthy
+# Responsible
+# Unhappy
+# Dominant
+
+def get_ml_data(image):
+    random.seed(27)
+
+    attractive = random.randint(0,9)
+    caring = random.randint(0,9)
+    aggressive = random.randint(0,9)
+    intelligent = random.randint(0,9)
+    confident = random.randint(0,9)
+    emotionally_stable = random.randint(0,9)
+    trustworthy = random.randint(0,9)
+    responsible = random.randint(0,9)
+    unhappy = random.randint(0,9)
+    dominant = random.randint(0,9)
+
+    dict = {}
+
+    dict["attractive"] = attractive
+    dict["caring"] = caring
+    dict["aggressive"] = aggressive
+    dict["intelligent"] = intelligent
+    dict["confident"] = confident
+    dict["emotionally_stable"] = emotionally_stable
+    dict["trustworthy"] = trustworthy
+    dict["responsible"] = responsible
+    dict["unhappy"] = unhappy
+    dict["dominant"] = dominant
+
+    return dict
