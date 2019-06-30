@@ -3,7 +3,6 @@ import { Button, Modal, Form } from 'react-bootstrap'
 import './Auth.css';
 
 class Auth extends Component {
-  // в пропах show, handleClose
 	    constructor(props) {
         super(props);
         

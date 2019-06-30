@@ -11,6 +11,8 @@ class MenuLeft extends Component {
         this.state = { 
             picture: null,
             show: false, 
+            buttonText: "Choose image",
+            label: "Max file size: 5mb, accepted: jpg|gif|png"
         };
 
         this.onDrop = this.onDrop.bind(this);
@@ -22,6 +24,10 @@ class MenuLeft extends Component {
     
       onDrop(picture) {
         console.log("uploadPhoto", picture);
+        this.setState({
+          buttonText: "Image uploaded",
+          label: ""
+        })
         function base64(file, callback){
           var coolFile = {};
           function readerOnload(e){
@@ -49,7 +55,7 @@ class MenuLeft extends Component {
       handleClose() {
         this.setState({ show: false });
       }
-    
+      
       handleShow() {
         this.setState({ show: true });
       }
@@ -61,6 +67,10 @@ class MenuLeft extends Component {
       }
     
       render() {
+        var fileContainerStyle = {
+          background: "#f5f5f5",
+          boxShadow: `0px 0px 0px #f5f5f5`,
+         };
         return (
           <div className="text-center">
                 <div className="buttons-form">
@@ -74,7 +84,9 @@ class MenuLeft extends Component {
                       setLoginPassword={this.props.setLoginPassword}/>
                     <ImageUploader
                         withIcon={true}
-                        buttonText='Choose images'
+                        fileContainerStyle={fileContainerStyle}
+                        buttonText={this.state.buttonText}
+                        label={this.state.label}
                         onChange={this.onDrop}
                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
                         maxFileSize={5242880}
