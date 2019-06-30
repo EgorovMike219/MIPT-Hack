@@ -5,6 +5,8 @@ const API_UPLOAD = '/upload';
 // Get result
 const API_RESULT = '/result';
 
+var logined = false;
+
 
 function fetchStatusCheck(response) {
     // console.log(response)
@@ -36,7 +38,7 @@ function uploadData(login, password, picture, test) {
         .then(fetchStatusCheck)
         .then(user => {
             // запоминаем пользователя
-            sessionStorage.setItem('login', login);
+            logined = true;
             return user;
             }
         );
@@ -55,9 +57,5 @@ function getResult() {
 function getUser() { 
     // если в хранилище нет login false - 
     // это означает пользователь не закончил заполнять о себе данные
-    if (sessionStorage.getItem('login'))
-        return true;
-    else {
-        return false;
-    }
+    return logined;
 }
