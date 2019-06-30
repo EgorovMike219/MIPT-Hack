@@ -68,8 +68,8 @@ class Auth extends Component {
                       onChange={this.handleInputChange} required />
                   </Form.Group>
                   {this.state.requestingServer === true ?
-                    <Button variant="primary" type="submit" disabled>Signing in...</Button>:
-                    <Button variant="primary" type="submit">Submit</Button>
+                    <Button variant="dark" type="submit" disabled>Signing in...</Button>:
+                    <Button variant="dark" type="submit">Submit</Button>
                   }
                 </Form>
               </Modal.Body>

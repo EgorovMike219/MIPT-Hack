@@ -71,6 +71,14 @@ class MenuLeft extends Component {
           background: "#f5f5f5",
           boxShadow: `0px 0px 0px #f5f5f5`,
          };
+        var buttonStyles = {
+          color: "#fff",
+          backgroundColor: "#23272b",
+          borderColor: "#1d2124",
+          fontWeight: 400,
+          fontSize: "1rem",
+          borderRadius: "0.25rem",
+        }
         return (
           <div className="text-center">
                 <div className="buttons-form">
@@ -85,13 +93,14 @@ class MenuLeft extends Component {
                     <ImageUploader
                         withIcon={true}
                         fileContainerStyle={fileContainerStyle}
+                        buttonStyles={buttonStyles}
                         buttonText={this.state.buttonText}
                         label={this.state.label}
                         onChange={this.onDrop}
                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
                         maxFileSize={5242880}
                     />
-                    <Button 
+                    <Button variant="dark"
                         onClick={this.passTest}
                     >Pass the Test</Button>
                 </div>

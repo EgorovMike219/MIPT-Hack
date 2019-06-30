@@ -9,7 +9,7 @@
     float:left;
     display:inline-block;
     margin:100 0 0 0;
-    padding:0%;
+    padding:7%;
     width:40%;
     height:100%;
 }
@@ -17,8 +17,8 @@
 .example {
     float:right;
     display:inline-block;
-    margin:0;
-    padding:0%;
+    margin:auto;
+    padding:0;
     width:60%;
     height:100%;
 }

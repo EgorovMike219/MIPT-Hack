@@ -268,7 +268,7 @@ class Example extends Component {
 
         return (
                 <div className="container image-container">
-                    <img src={ welcome_background }/>
+                    {/* <img src={ welcome_background }/> */}
                 </div>
         );
     }
