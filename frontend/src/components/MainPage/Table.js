@@ -47,7 +47,7 @@ TableV.create = (el, dataset) => {
         var data = data_array.map(function(arr) {
             return {day: arr[0], hour: arr[1], value: arr[2]};
         });
-        var colorScale = d3.scale.quantile()
+        var colorScale = d3.scaleQuantile()
             .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
             .range(colors);
 

@@ -46,16 +46,15 @@ class WelcomePage extends Component {
               // это делает authenticationService
 
               // записываем данные которые пришли
-              this.props.getData(data, ()=>{
-                  // говорим что ожидание закончилось
-                  this.setState({ requestingServer: false});
+              this.props.getData(data)
+              // говорим что ожидание закончилось
+              this.setState({ requestingServer: false});
 
-                  // не знаю нормально будет работать 
-                  // может это засунуть в getData
-                  // перебрасываем на начальную стадию, которая делает проверки
-                  const { from } = this.props.location.state || { from: { pathname: "/" } };
-                  this.props.history.push(from);
-                });
+              // не знаю нормально будет работать 
+              // может это засунуть в getData
+              // перебрасываем на начальную стадию, которая делает проверки
+              const { from } = this.props.location.state || { from: { pathname: "/" } };
+              this.props.history.push(from);
             }).catch(err => {
               // говорим что ожидание закончилось
               this.setState({ requestingServer: false});
