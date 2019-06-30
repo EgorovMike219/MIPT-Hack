@@ -11,12 +11,26 @@ import 'font-awesome/css/font-awesome.css'
 
 class App extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = { 
+            data: null, 
+        };
+        this.getData = this.getData.bind(this);
+    }
+    
+    getData(data) {
+        this.setState({data: data})
+    }
+
     render() {
         return (
             <Router history={history}>
                 <div className='app-container'>
-					<PrivateRoute exact path="/" component={MainPage} />
-					<Route path="/login" component={WelcomePage} />
+					<PrivateRoute exact path="/" component={MainPage} data={this.state.data} />
+                    <Route path="/login"
+                        render={(props) => <WelcomePage {...props} getData={this.getData}/>} />
                 </div>
             </Router>
         );

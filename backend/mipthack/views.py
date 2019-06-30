@@ -25,11 +25,6 @@ def user_upload(request):
         image = answer[2]
         test = answer[3]
         data = result(login, password, image, test)
-        with open('dataset.tsv', 'r') as f:
-            keys = f.readline().strip().split('\t')
-            for line in f.readlines():
-                line = line.strip().split('\t')
-                data.append(line)
-        return JsonResponse(data)
+        return JsonResponse(data, safe=False)
     else:
         return HttpResponse(status=400)
