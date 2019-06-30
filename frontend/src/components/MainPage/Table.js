@@ -12,7 +12,12 @@ TableV.create = (el, dataset) => {
     var legendElementWidth = gridSize * 2,
     colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"],
     areas = ["Desktop", "Soft Skills", "ML", "Front", "Back", "DevOps", "Mobile", 
-                "Game", "Test", "Psychiognomy"];
+                "Game", "Test", "Personality"];
+    dataset.forEach(arr_element => {
+        arr_element.forEach(element => {
+            areas[element.x] = element.areas;
+        })
+    });
     
     var width = 0.8 * window.innerWidth;
     var height = 0.9 * window.innerHeight; 
@@ -26,44 +31,50 @@ TableV.create = (el, dataset) => {
         .attr("height", height)
         .attr("transform", "translate(" + margin_width + "," + margin_height + ")");
 
+    var areaLabels = svg.selectAll(".areaLabels")
+        .data(areas)
+        .enter().append("text")
+          .text(function (d) { return d; })
+          .attr("x", function (d, i) { return i * gridSize; })
+          .attr("y", 0)
+          .style("text-anchor", "end")
+          .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+          .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+
+
     var heatmapChart = function(data_array) {
         var data = data_array.map(function(arr) {
-            return {area: arr[0], tech: arr[1], value: arr[2], name: arr[3]};
+            return {x: arr[3], y: arr[4], value: arr[1], area: arr[0], tech: arr[2]};
         });
+
 
         var colorScale = {0: "#ffffed", 1: "#ffffd9", 2: "#edf8b1", 3: "#c7e9b4", 
                             4: "#7fcdbb", 5: "#41b6c4", 6: "#1d91c0", 
                             7: "#225ea8", 8: "#253494", 9: "#081d58"}
 
-        var cards = svg.selectAll(".tech")
-            .data(data, function(d) {return d.area+':'+d.tech;});
+        var cards = svg.selectAll(".y")
+            .data(data, function(d) {return d.x+':'+d.y;});
+
+        cards.enter().append("title");
 
         cards.enter().append("rect")
-            .attr("x", function(d) { return (d.area - 1) * gridSize; })
-            .attr("y", function(d) { return (d.tech - 1) * gridSize; })
+            .attr("x", function(d) { return (d.x - 1) * gridSize; })
+            .attr("y", function(d) { return (d.y - 1) * gridSize; })
             .attr("rx", 4)
             .attr("ry", 4)
-            .attr("class", "tech bordered")
+            .attr("class", "y bordered")
             .attr("width", gridSize)
             .attr("height", gridSize)
             .style("fill", function(d) {
                 return colorScale[d.value]; 
             });
 
-        // var timeLabels = svg.selectAll(".timeLabel")
-        //     .data(data)
-        //     .enter().append("text")
-        //     .text(function(d) { return areas[d.area]; })
-        //     .attr("x", function(d, i) { return i * gridSize; })
-        //     .attr("y", 0)
-        //     .style("text-anchor", "middle")
-
         // cards.transition().duration(0)
         //     .style("fill", function(d) { 
         //         console.log(d.value)
         //         return colorScale[d.value]; });
 
-        // cards.select("title").text(function(d) { return d.value; });
+        cards.select("title").text(function(d) { return d.tech; });
 
         // cards.append("title");
             
