@@ -306,7 +306,7 @@ def result(login, password, image, test):
     data2.append(["Soft Skills", test[4] * 2, "Prioritisation"])
     data2.append(["Soft Skills", test[4] * 2, "Scheduling"])
 
-    sum_data2 = sum(test) * 2
+    sum_data2 = sum(test) * 4
 
     data3.append(["ML", python, "Python"])
     data3.append(["ML", r, "R"])
