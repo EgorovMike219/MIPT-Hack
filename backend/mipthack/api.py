@@ -295,16 +295,16 @@ def result(login, password, image, test):
 
     sum_data1 = react_native + swift + winapi + cpp + c_sharp + java + python + qt + go + electron
 
-    data2.append(["Soft Skills", test[0] * 2, "Leadership"])
-    data2.append(["Soft Skills", test[0] * 2, "Management"])
-    data2.append(["Soft Skills", test[1] * 2, "Problem\n Solving"])
-    data2.append(["Soft Skills", test[1] * 2, "Decision\n Making"])
-    data2.append(["Soft Skills", test[2] * 2, "Listening"])
-    data2.append(["Soft Skills", test[2] * 2, "Speaking"])
-    data2.append(["Soft Skills", test[3] * 2, "Self-\nConfidence"])
-    data2.append(["Soft Skills", test[3] * 2, "Positive-think"])
-    data2.append(["Soft Skills", test[4] * 2, "Prioritisation"])
-    data2.append(["Soft Skills", test[4] * 2, "Scheduling"])
+    data2.append(["Soft Skills", int(test[0] * 2), "Leadership"])
+    data2.append(["Soft Skills", int(test[0] * 2), "Management"])
+    data2.append(["Soft Skills", int(test[1] * 2), "Problem\n Solving"])
+    data2.append(["Soft Skills", int(test[1] * 2), "Decision\n Making"])
+    data2.append(["Soft Skills", int(test[2] * 2), "Listening"])
+    data2.append(["Soft Skills", int(test[2] * 2), "Speaking"])
+    data2.append(["Soft Skills", int(test[3] * 2), "Self-\nConfidence"])
+    data2.append(["Soft Skills", int(test[3] * 2), "Positive-think"])
+    data2.append(["Soft Skills", int(test[4] * 2), "Prioritisation"])
+    data2.append(["Soft Skills", int(test[4] * 2), "Scheduling"])
 
     sum_data2 = sum(test) * 4
 
