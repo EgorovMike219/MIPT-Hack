@@ -21,6 +21,7 @@ import numpy as np
 import cv2
 from github import Github
 import random
+from .get_keypoints import get_keypoints, transform_img_with_keypoints
 
 
 def check(value):
@@ -78,20 +79,25 @@ def get_languages_data(user, password):
 # Unhappy
 # Dominant
 
+def softmax10(arr):
+    return 7 * (arr - np.min(arr)) / np.max(arr)
 
 def get_ml_data(image):
-    attractive = random.randint(0,9)
-    caring = random.randint(0,9)
-    aggressive = random.randint(0,9)
-    intelligent = random.randint(0,9)
-    confident = random.randint(0,9)
-    emotionally_stable = random.randint(0,9)
-    trustworthy = random.randint(0,9)
-    responsible = random.randint(0,9)
-    unhappy = random.randint(0,9)
-    dominant = random.randint(0,9)
 
-    data = [attractive, caring, aggressive, intelligent,confident, emotionally_stable, trustworthy, responsible, unhappy, dominant]
+    keypoints = get_keypoints(image)
+    w = np.array(keypoints)
+    data_keypoints = w[0]
+
+
+
+    arr_for_softmax = np.array([np.mean(data_keypoints[:10,:,:]), np.mean(data_keypoints[10:20,:,:]), np.mean(data_keypoints[20:30,:,:]),
+                       np.mean(data_keypoints[30:40,:,:]), np.mean(data_keypoints[40:50,:,:]), np.mean(data_keypoints[50:60,:,:]),
+                       np.mean(data_keypoints[60:70,:,:]), np.mean(data_keypoints[70:80,:,:]), np.mean(data_keypoints[80:90,:,:]),
+                       np.mean(data_keypoints[90:,:,:])]) * np.array(range(1, 11))
+
+    data = list(np.array(softmax10(arr_for_softmax), dtype=int))
+    data = [int(value) for value in data]
+    print(data)
 
     return data
 
@@ -467,7 +473,7 @@ def result(login, password, image, test):
             for x in data10:
                 data.append(x)
 
-    print(data)
+    #print(data)
 
     return data
 

@@ -8,3 +8,5 @@ pika
 Pillow
 opencv-python
 PyGithub
+torch
+scikit-image
