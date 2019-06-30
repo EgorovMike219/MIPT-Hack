@@ -5,36 +5,42 @@ var d3;
 TableV.create = (el, dataset) => {
     d3 = require("d3"); 
 
-    var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-    width = 960 - margin.left - margin.right,
-    height = 960 - margin.top - margin.bottom,
-    gridSize = Math.floor(width / 15),
-    legendElementWidth = gridSize * 2,
+    // var margin = { top: 50, right: 50, bottom: 50, left: 50 },
+    // width = 960 - margin.left - margin.right,
+    // height = 960 - margin.top - margin.bottom,
+    // gridSize = Math.floor(width / 15),
+    var legendElementWidth = gridSize * 2,
     colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"],
     areas = ["Desktop", "Soft Skills", "ML", "Front", "Back", "DevOps", "Mobile", 
                 "Game", "Test", "Psychiognomy"];
     
+    var width = 0.8 * window.innerWidth;
+    var height = 0.9 * window.innerHeight; 
+    var table_size = Math.min(width, height);
+    var margin_width = (window.innerWidth - table_size) / 2;
+    var margin_height = (window.innerHeight - table_size) / 2 
+    var gridSize = Math.floor(table_size / 10)
+
     var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" + margin_width + "," + margin_height + ")");
 
     var heatmapChart = function(data_array) {
         var data = data_array.map(function(arr) {
-            return {area: arr[0], tech: arr[1], value: arr[2]};
+            return {area: arr[0], tech: arr[1], value: arr[2], name: arr[3]};
         });
 
         var colorScale = {0: "#ffffed", 1: "#ffffd9", 2: "#edf8b1", 3: "#c7e9b4", 
                             4: "#7fcdbb", 5: "#41b6c4", 6: "#1d91c0", 
                             7: "#225ea8", 8: "#253494", 9: "#081d58"}
 
-        var cards = svg.selectAll(".area")
+        var cards = svg.selectAll(".tech")
             .data(data, function(d) {return d.area+':'+d.tech;});
 
         cards.enter().append("rect")
-            .attr("x", function(d) { return (d.tech - 1) * gridSize; })
-            .attr("y", function(d) { return (d.area - 1) * gridSize; })
+            .attr("x", function(d) { return (d.area - 1) * gridSize; })
+            .attr("y", function(d) { return (d.tech - 1) * gridSize; })
             .attr("rx", 4)
             .attr("ry", 4)
             .attr("class", "tech bordered")
@@ -44,22 +50,22 @@ TableV.create = (el, dataset) => {
                 return colorScale[d.value]; 
             });
 
-        var timeLabels = svg.selectAll(".timeLabel")
-            .data(data)
-            .enter().append("text")
-            .text(function(d) { return areas[d.area]; })
-            .attr("x", function(d, i) { return i * gridSize; })
-            .attr("y", 0)
-            .style("text-anchor", "middle")
+        // var timeLabels = svg.selectAll(".timeLabel")
+        //     .data(data)
+        //     .enter().append("text")
+        //     .text(function(d) { return areas[d.area]; })
+        //     .attr("x", function(d, i) { return i * gridSize; })
+        //     .attr("y", 0)
+        //     .style("text-anchor", "middle")
 
         // cards.transition().duration(0)
         //     .style("fill", function(d) { 
         //         console.log(d.value)
         //         return colorScale[d.value]; });
 
-        cards.select("title").text(function(d) { return d.value; });
+        // cards.select("title").text(function(d) { return d.value; });
 
-        cards.append("title");
+        // cards.append("title");
             
         cards.exit().remove();
 
