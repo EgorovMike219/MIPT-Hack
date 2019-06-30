@@ -158,7 +158,7 @@ def result(login, password, image, test):
         c = random.randint(0,9)
 
     if 'Jupyter Notebook' in languages_data:
-        jupyter_notebook = languages_data['Jupyter Notebook']
+        jupyter_notebook = languages_data["Jupyter Notebook"]
     else:
         jupyter_notebook = random.randint(0,9)
 
@@ -297,12 +297,12 @@ def result(login, password, image, test):
 
     data2.append(["Soft Skills", test[0] * 2, "Leadership"])
     data2.append(["Soft Skills", test[0] * 2, "Management"])
-    data2.append(["Soft Skills", test[1] * 2, "Problem Solving"])
-    data2.append(["Soft Skills", test[1] * 2, "Decision Making"])
+    data2.append(["Soft Skills", test[1] * 2, "Problem\n Solving"])
+    data2.append(["Soft Skills", test[1] * 2, "Decision\n Making"])
     data2.append(["Soft Skills", test[2] * 2, "Listening"])
     data2.append(["Soft Skills", test[2] * 2, "Speaking"])
-    data2.append(["Soft Skills", test[3] * 2, "Self-Confidence"])
-    data2.append(["Soft Skills", test[3] * 2, "Positive-thinking"])
+    data2.append(["Soft Skills", test[3] * 2, "Self-\nConfidence"])
+    data2.append(["Soft Skills", test[3] * 2, "Positive-think"])
     data2.append(["Soft Skills", test[4] * 2, "Prioritisation"])
     data2.append(["Soft Skills", test[4] * 2, "Scheduling"])
 
@@ -313,7 +313,7 @@ def result(login, password, image, test):
     data3.append(["ML", cpp, "C++"])
     data3.append(["ML", scala, "Scala"])
     data3.append(["ML", swift, "Swift"])
-    data3.append(["ML", jupyter_notebook, "Jupyter Notebook"])
+    data3.append(["ML", jupyter_notebook, "Jupyter Noteb."])
     data3.append(["ML", tensorflow, "TensorFlow"])
     data3.append(["ML", mathematics, "Mathematics"])
     data3.append(["ML", pytorch, "PyTorch"])
@@ -364,7 +364,7 @@ def result(login, password, image, test):
     data7.append(["MobileDev", java, "Java"])
     data7.append(["MobileDev", kotlin, "Kotlin"])
     data7.append(["MobileDev", objectivec, "Objective-C"])
-    data7.append(["MobileDev", mobile_angular, "Mobile Angular UI"])
+    data7.append(["MobileDev", mobile_angular, "Mob.Angular UI"])
     data7.append(["MobileDev", react_native, "React Native"])
     data7.append(["MobileDev", xamarin, "Xamarin"])
     data7.append(["MobileDev", flutter, "Flutter"])
@@ -378,10 +378,10 @@ def result(login, password, image, test):
     data8.append(["GameDev", opengl, "OpenGL"])
     data8.append(["GameDev", cuda, "CUDA"])
     data8.append(["GameDev", unity, "Unity"])
-    data8.append(["GameDev", unreal_engine, "Unreal Engine"])
-    data8.append(["GameDev", augmented_knowledge, "Augmented Knowledge"])
+    data8.append(["GameDev", unreal_engine, "Unreal\n Engine"])
+    data8.append(["GameDev", augmented_knowledge, "Aug. Knowledge"])
     data8.append(["GameDev", modeling3d, "3D modeling"])
-    data8.append(["GameDev", audio_knowledge, "Audio Knowledge"])
+    data8.append(["GameDev", audio_knowledge, "Aud. Knowledge"])
     data8.append(["GameDev", vr, "Virtual Reality"])
 
     sum_data8 = c_sharp + cpp + opengl + cuda + unity + unreal_engine + augmented_knowledge + modeling3d + audio_knowledge + vr
@@ -394,8 +394,8 @@ def result(login, password, image, test):
     data9.append(["Test", c_sharp, "C#"])
     data9.append(["Test", php, "PHP"])
     data9.append(["Test", unit_test, "Unit test"])
-    data9.append(["Test", google_test, "Google test"])
-    data9.append(["Test", test_knowledge, "Test Knowledge"])
+    data9.append(["Test", google_test, "Google\n test"])
+    data9.append(["Test", test_knowledge, "Test\n Knowledge"])
 
     sum_data9 = python + cpp + java + c + go + c_sharp + php + unit_test + google_test + test_knowledge
 
@@ -404,7 +404,7 @@ def result(login, password, image, test):
     data10.append(["Personality", ml_data[2], "Aggressive"])
     data10.append(["Personality", ml_data[3], "Intelligent"])
     data10.append(["Personality", ml_data[4], "Confident"])
-    data10.append(["Personality", ml_data[5], "Emotionally stable"])
+    data10.append(["Personality", ml_data[5], "Emotion. stable"])
     data10.append(["Personality", ml_data[6], "Trustworthy"])
     data10.append(["Personality", ml_data[7], "Responsible"])
     data10.append(["Personality", ml_data[8], "Unhappy"])

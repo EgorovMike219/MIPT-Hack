@@ -1,7 +1,7 @@
 .image-container {
-    background-image: url(../../../images/welcome_background.jpg);
+    background-image: url(../../../images/Hack.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: content;
     height:100vh;
 }
 

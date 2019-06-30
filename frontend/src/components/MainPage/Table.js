@@ -71,9 +71,9 @@ TableV.create = (el, dataset) => {
         cards.enter()
             .append("text")
             .text(function (d) { return d.tech; })
-            .attr("x", function (d, i) { return  (d.x - 1) * 2*gridSize; })
-            .attr("y", function (d, i) { return (d.y) * gridSize - 2; })
-            .attr("class", function(d, i) { return (d.y > 4 ? 
+            .attr("x", function (d, i) { return  (d.x - 1) * 2*gridSize + 10; })
+            .attr("y", function (d, i) { return (d.y) * gridSize -10 - (d.x % 2) * 15; })
+            .attr("class", function(d, i) { return ((d.y > 4 || d.x > 9) ? 
                                             "blackFont" :
                                             "whiteFont"); });
 
@@ -86,28 +86,7 @@ TableV.create = (el, dataset) => {
 
         // cards.append("title");
             
-        cards.exit().remove();
-
-        // var legend = svg.selectAll(".legend")
-        //     .data([0].concat(colorScale.quantiles()), function(d) { return d; });
-
-        // legend.enter().append("g")
-        //     .attr("class", "legend");
-
-        // legend.append("rect")
-        //     .attr("x", function(d, i) { return legendElementWidth * i; })
-        //     .attr("y", height)
-        //     .attr("width", legendElementWidth)
-        //     .attr("height", gridSize / 2)
-        //     .style("fill", function(d, i) { return colors[i]; });
-
-        // legend.append("text")
-        //     .attr("class", "mono")
-        //     .text(function(d) { return "≥ " + Math.round(d); })
-        //     .attr("x", function(d, i) { return legendElementWidth * i; })
-        //     .attr("y", height + gridSize);
-
-        // legend.exit().remove();  
+        cards.exit().remove(); 
     };
 
     heatmapChart(dataset);
