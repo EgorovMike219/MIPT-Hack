@@ -1,4 +1,4 @@
-# MIPT-Huck
+# MIPT-Hack solution for Hanabi Hackathon
 
 python3 -m venv env
 
