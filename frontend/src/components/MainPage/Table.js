@@ -5,41 +5,40 @@ var d3;
 TableV.create = (el, dataset) => {
     d3 = require("d3"); 
 
-    // var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-    // width = 960 - margin.left - margin.right,
-    // height = 960 - margin.top - margin.bottom,
-    // gridSize = Math.floor(width / 15),
-    var legendElementWidth = gridSize * 2,
+    var margin = { 
+         top: 0.1 * window.innerHeight,
+         right: 0.1 * window.innerWidth, 
+         bottom: 0.1 * window.innerHeight,
+         left: 0.1 * window.innerWidth },
+    width = 1 * window.innerWidth - margin.left - margin.right,
+    height = 1 * window.innerHeight - margin.top - margin.bottom,
     colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"],
     areas = ["Desktop", "Soft Skills", "ML", "Front", "Back", "DevOps", "Mobile", 
                 "Game", "Test", "Personality"];
-    dataset.forEach(arr_element => {
-        arr_element.forEach(element => {
-            areas[element.x] = element.areas;
-        })
-    });
+    var step;
+    for (step = 0; step < 100; step++) {
+        var element = dataset[step];
+        console.log(element);
+        areas[element[3] - 1] = element[0];  // здесь ошибка они не записываются
+    }
     
-    var width = 0.8 * window.innerWidth;
-    var height = 0.9 * window.innerHeight; 
     var table_size = Math.min(width, height);
-    var margin_width = (window.innerWidth - table_size) / 2;
-    var margin_height = (window.innerHeight - table_size) / 2 
     var gridSize = Math.floor(table_size / 10)
+    var legendElementWidth = gridSize * 2;
 
     var svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("transform", "translate(" + margin_width + "," + margin_height + ")");
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var areaLabels = svg.selectAll(".areaLabels")
         .data(areas)
         .enter().append("text")
-          .text(function (d) { return d; })
-          .attr("x", function (d, i) { return i * gridSize; })
-          .attr("y", 0)
-          .style("text-anchor", "end")
-          .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
-          .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+          .text(function (d) { console.log(d); return d; })
+          .attr("x", function (d, i) { return  10+i * 2*gridSize; })
+          .attr("y", function (d, i) { return (-1)**i * 10 - 30; })
+          .attr("class", function (d, i) { return "mono"; });
 
 
     var heatmapChart = function(data_array) {
@@ -58,16 +57,25 @@ TableV.create = (el, dataset) => {
         cards.enter().append("title");
 
         cards.enter().append("rect")
-            .attr("x", function(d) { return (d.x - 1) * gridSize; })
+            .attr("x", function(d) { return (d.x - 1) * 2*gridSize; })
             .attr("y", function(d) { return (d.y - 1) * gridSize; })
             .attr("rx", 4)
             .attr("ry", 4)
             .attr("class", "y bordered")
-            .attr("width", gridSize)
+            .attr("width", 2*gridSize)
             .attr("height", gridSize)
             .style("fill", function(d) {
                 return colorScale[d.value]; 
-            });
+            })
+        
+        cards.enter()
+            .append("text")
+            .text(function (d) { return d.tech; })
+            .attr("x", function (d, i) { return  (d.x - 1) * 2*gridSize; })
+            .attr("y", function (d, i) { return (d.y) * gridSize - 2; })
+            .attr("class", function(d, i) { return (d.y > 4 ? 
+                                            "blackFont" :
+                                            "whiteFont"); });
 
         // cards.transition().duration(0)
         //     .style("fill", function(d) { 

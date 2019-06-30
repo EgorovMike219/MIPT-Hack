@@ -12,7 +12,7 @@ class WelcomePage extends Component {
         this.state = {
           testEnabled: false,
           picture: null,
-          test: [5, 4, 3, 2, 1],
+          test: [1,2,3,4,5],
           login: '101vl@mail.ru',
           password: '971127Vlad',
           requestingServer: false,
