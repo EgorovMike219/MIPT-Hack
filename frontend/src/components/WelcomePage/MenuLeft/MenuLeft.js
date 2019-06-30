@@ -5,7 +5,7 @@ import Auth from '../Auth/Auth'
 import './MenuLeft.css'
 
 class MenuLeft extends Component {
-	constructor(props) {
+	    constructor(props) {
         super(props);
 
         this.state = { 

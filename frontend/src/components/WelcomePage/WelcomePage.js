@@ -12,7 +12,7 @@ class WelcomePage extends Component {
         this.state = {
           testEnabled: false,
           picture: null,
-          test: null,
+          test: 1,
           login: '',
           password: '',
           requestingServer: false,
@@ -40,16 +40,22 @@ class WelcomePage extends Component {
           console.log("Upload data");
           authenticationService.uploadData(this.state.login,
             this.state.password, this.state.picture, this.state.test
-            ).then(user => {
+            ).then(data => {
+              console.log(data);
               //помечаем что чувак все заполнил 
               // это делает authenticationService
 
-              // говорим что ожидание закончилось
-              this.setState({ requestingServer: false});
+              // записываем данные которые пришли
+              this.props.getData(data, ()=>{
+                  // говорим что ожидание закончилось
+                  this.setState({ requestingServer: false});
 
-              // перебрасываем на начальную стадию, которая делает проверки
-              const { from } = this.props.location.state || { from: { pathname: "/" } };
-              this.props.history.push(from);
+                  // не знаю нормально будет работать 
+                  // может это засунуть в getData
+                  // перебрасываем на начальную стадию, которая делает проверки
+                  const { from } = this.props.location.state || { from: { pathname: "/" } };
+                  this.props.history.push(from);
+                });
             }).catch(err => {
               // говорим что ожидание закончилось
               this.setState({ requestingServer: false});
