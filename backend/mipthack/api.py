@@ -422,7 +422,20 @@ def result(login, password, image, test):
 
     sum_data.sort(key=lambda x: x[0], reverse=True)
 
-    for i in sum_data:
+    sum_data_copy = [[], [], [], [], [], [], [], [], [], []]
+
+    sum_data_copy[4] = sum_data[0]
+    sum_data_copy[5] = sum_data[1]
+    sum_data_copy[3] = sum_data[2]
+    sum_data_copy[6] = sum_data[3]
+    sum_data_copy[2] = sum_data[4]
+    sum_data_copy[7] = sum_data[5]
+    sum_data_copy[1] = sum_data[6]
+    sum_data_copy[8] = sum_data[7]
+    sum_data_copy[0] = sum_data[8]
+    sum_data_copy[9] = sum_data[9]
+
+    for i in sum_data_copy:
         if i[1] == 1:
             for x in data1:
                 data.append(x)
